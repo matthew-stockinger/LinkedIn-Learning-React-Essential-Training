@@ -1,83 +1,86 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <script
-      src="https://unpkg.com/react@17/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
-      crossorigin
-    ></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <title>React ⚛️</title>
-  </head>
-  <body>
-    <div id="root"></div>
+<html lang="en-US">
 
-    <script type="text/babel">
-      function Header(props) {
-        return (
-          <header>
-            <h1>{props.name}'s Kitchen</h1>
-          </header>
-        );
-      }
-      function Main(props) {
-        return (
-          <section>
-            <ul>
-              {props.dishes.map((dish) => (
-                <li key={dish.id}>
-                  {dish.title}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      }
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <title>React ⚛️</title>
+</head>
 
-      function Footer(props) {
-        return (
-          <footer>
-            <p>Copyright {props.year}</p>
-          </footer>
-        );
-      }
+<body>
+  <div id="root"></div>
 
-      const dishes = [
-        "Black Bean Soup",
-        "Macaroni and Cheese",
-        "Salmon and Potatoes",
-        "Pizza"
-      ];
-      const dishObjects = dishes.map(
-        (dish, i) => ({
-          id: i,
-          title: dish
-        })
+  <script type="text/babel">
+    function Header(props) {
+      return (
+        <header>
+          <h1>{props.name}'s Kitchen</h1>
+        </header>
       );
-
-      function App() {
-        return (
-          <div>
-            <Header name="Cindy" />
-            <Main
-              adjective="amazing"
-              dishes={dishObjects}
-            />
-            <Footer
-              year={new Date().getFullYear()}
-            />
-          </div>
-        );
-      }
-
-      ReactDOM.render(
-        <App />,
-        document.getElementById("root")
+    }
+    function Main(props) {
+      return (
+        <main>
+          <img
+            src="restaurant.jpeg"
+            alt="The inside of a cozy, but empty cafe.  One wall is brick, while the front wall is glass looking out onto the sunny street."
+            width={300 * 4 / 3}
+            height={300}
+          />
+          <ul>
+            {props.dishes.map((dish) => (
+              <li key={dish.id}>
+                {dish.title}
+              </li>
+            ))}
+          </ul>
+        </main>
       );
-    </script>
-  </body>
+    }
+
+    function Footer(props) {
+      return (
+        <footer>
+          <p>Copyright {props.year}</p>
+        </footer>
+      );
+    }
+
+    const dishes = [
+      "Black Bean Soup",
+      "Macaroni and Cheese",
+      "Salmon and Potatoes",
+      "Pizza"
+    ];
+    const dishObjects = dishes.map(
+      (dish, i) => ({
+        id: i,
+        title: dish
+      })
+    );
+
+    function App() {
+      return (
+        <React.Fragment>
+          <Header name="Cindy" />
+          <Main
+            adjective="amazing"
+            dishes={dishObjects}
+          />
+          <Footer
+            year={new Date().getFullYear()}
+          />
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById("root")
+    );
+  </script>
+</body>
+
 </html>
