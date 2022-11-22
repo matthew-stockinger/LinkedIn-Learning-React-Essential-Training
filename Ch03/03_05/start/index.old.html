@@ -10,66 +10,75 @@
 </head>
 
 <body>
-
-  <!------- Recreated from memory for practice ------------------>
-
-
   <div id="root"></div>
 
   <script type="text/babel">
     function Header(props) {
       return (
-        <h1>{props.name}'s Kitchen</h1>
+        <header>
+          <h1>{props.name}'s Kitchen</h1>
+        </header>
       );
     }
     function Main(props) {
       return (
         <main>
-          <p>We serve the most {props.dishDescriptor} food!</p>
           <img
             src="restaurant.jpeg"
-            alt="A beautiful cafe"
+            alt="The inside of a cozy, but empty cafe.  One wall is brick, while the front wall is glass looking out onto the sunny street."
             width={300 * 4 / 3}
             height={300}
           />
           <ul>
-            {props.dishObjects.map(dishObject => (
-              <li key={dishObject.id}>{dishObject.name}</li>
+            {props.dishes.map((dish) => (
+              <li key={dish.id}>
+                {dish.title}
+              </li>
             ))}
           </ul>
         </main>
       );
     }
-    function Footer() {
+
+    function Footer(props) {
       return (
-        <p>Copyright {new Date().getFullYear()}</p>
+        <footer>
+          <p>Copyright {props.year}</p>
+        </footer>
       );
     }
 
-    const dishNames = [
-      "Fois Gras",
-      "Cous Cous",
-      "Pizza",
-      "Whatever"
+    const dishes = [
+      "Black Bean Soup",
+      "Macaroni and Cheese",
+      "Salmon and Potatoes",
+      "Pizza"
     ];
-
-    const dishObjects = dishNames.map((dishName, i) => ({
-      name: dishName,
-      id: i
-    }));
+    const dishObjects = dishes.map(
+      (dish, i) => ({
+        id: i,
+        title: dish
+      })
+    );
 
     function App() {
       return (
         <React.Fragment>
-          <Header name="Matt" />
-          <Main dishDescriptor="amazing" dishObjects={dishObjects} />
-          <Footer />
+          <Header name="Cindy" />
+          <Main
+            adjective="amazing"
+            dishes={dishObjects}
+          />
+          <Footer
+            year={new Date().getFullYear()}
+          />
         </React.Fragment>
       );
     }
+
     ReactDOM.render(
       <App />,
-      document.querySelector("#root")
+      document.getElementById("root")
     );
   </script>
 </body>
